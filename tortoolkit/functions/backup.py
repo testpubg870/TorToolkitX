@@ -15,7 +15,7 @@ torlog = logging.getLogger(__name__)
 async def backup_file(e):
     if not e.is_reply:
         await e.reply("Reply to Drive Upload Successfull Message.")
-    elif not check_for_index(e):
+    elif not await check_for_index(e):
         await e.reply("Index URL Button Not Present.")
     else:
         url = index_url(e)
