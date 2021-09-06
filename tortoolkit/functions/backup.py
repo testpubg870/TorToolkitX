@@ -19,5 +19,8 @@ def check_for_index(e):
   if (await e.get_reply_message()).buttons is None:
         return False
   for i in (await e.get_reply_message()).buttons:
-        
+        for s in i:
+            if s.text=="Index URL":
+                return True
+  return False
   
