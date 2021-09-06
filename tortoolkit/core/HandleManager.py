@@ -64,6 +64,8 @@ def add_handlers(bot: TelegramClient):
         backup_file,
         events.NewMessage(
             pattern=command_process(get_command("BACKUP")), chats=get_val("ALD_USR")
+        ),
+    )
 
     bot.add_event_handler(
         handle_leech_command,
