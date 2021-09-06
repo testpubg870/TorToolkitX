@@ -18,7 +18,7 @@ async def backup_file(e):
     elif not await check_for_index(e):
         await e.reply("Index URL Button Not Present.")
     else:
-        url = index_url(e)
+        url = await index_url(e)
         rmsg = await e.reply("**Processing the link...**")
         
         torlog.info("The aria2 Downloading:\n{}".format(url))
