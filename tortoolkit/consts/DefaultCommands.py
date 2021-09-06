@@ -1,4 +1,5 @@
 class Commands:
+    BACKUP = "backup"
     LEECH = "leech"
     PURGE = "purge"
     PAUSEALL = "pauseall"
