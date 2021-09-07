@@ -21,7 +21,7 @@ async def backup_file(e):
     #elif not await check_for_index(e):
         #await e.reply("Index URL Button Not Present.")
     else:
-        if check_for_index(e):
+        if await check_for_index(e):
             url = await index_url(e)
         elif ".*http.*" in e.raw_text:
             url = e.raw_text
