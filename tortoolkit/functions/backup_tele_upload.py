@@ -708,7 +708,7 @@ async def upload_single_file(
                 )
             else:
                 sent_message = await message.client.send_document(
-                    chat_id=get_val("BACKUP_CHANNEL")
+                    chat_id=get_val("BACKUP_CHANNEL"),
                     document=path,
                     # quote=True,
                     thumb=thumb,
