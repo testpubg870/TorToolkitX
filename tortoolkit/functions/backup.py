@@ -55,8 +55,13 @@ async def backup_file(e):
                 await ul_task.set_inactive()
                 await print_files(e, rdict, path=path, size=ul_size)
                 torlog.info("Here are the files to be uploaded {}".format(rdict))
+                
+        elif stat is False:
+                reason = await dl_task.get_error()
+                await rmsg.edit("Failed to download this file.\n" + str(reason))
+                await errored_message(omess, rmsg)
         
-            await clear_stuff(path)
+        await clear_stuff(path)
     return None
       
     
