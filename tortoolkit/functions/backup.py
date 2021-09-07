@@ -1,5 +1,6 @@
 import asyncio as aio
 import logging
+import shutil
 
 from .. import transfer
 from . import ariatools
@@ -52,7 +53,7 @@ async def backup_file(e):
                 torlog.exception("Exception in Direct links.")
 
                 await ul_task.set_inactive()
-                await print_files(omess, rdict, path=path, size=ul_size)
+                await print_files(e, rdict, path=path, size=ul_size)
                 torlog.info("Here are the files to be uploaded {}".format(rdict))
         
             await clear_stuff(path)
@@ -100,4 +101,11 @@ def get_size_fl(start_path="."):
 
     return total_size
 
-
+async def clear_stuff(path):
+    try:
+        if os.path.isdir(path):
+            shutil.rmtree(path)
+        else:
+            os.remove(path)
+    except:
+        pass
