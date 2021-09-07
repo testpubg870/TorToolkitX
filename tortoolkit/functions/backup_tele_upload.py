@@ -707,7 +707,7 @@ async def upload_single_file(
                     # quote=True,
                 )
             else:
-                sent_message = await thonmsg.client.send_document(
+                sent_message = await thonmsg.client.pyro.send_document(
                     chat_id=get_val("BACKUP_CHANNEL"),
                     document=path,
                     # quote=True,
