@@ -483,7 +483,7 @@ def black_list_exts(file):
 
 # async def upload_single_file(message, local_file_name, caption_str, from_user, edit_media):
 async def upload_single_file(
-    path, message, force_edit, database=None, thumb_image_path=None, user_msg=None
+    path, message, force_edit, database=None, thumb_image_path=None, user_msg=None, url=None
 ):
     if database is not None:
         if database.get_cancel_status(message.chat_id, message.id):
