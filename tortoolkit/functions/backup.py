@@ -60,7 +60,7 @@ async def backup_file(e):
         elif stat is False:
                 reason = await dl_task.get_error()
                 await rmsg.edit("Failed to download this file.\n" + str(reason))
-                await errored_message(omess, rmsg)
+                await errored_message(e, rmsg)
         
         await clear_stuff(path)
     return None
