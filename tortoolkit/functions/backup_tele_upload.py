@@ -46,6 +46,7 @@ async def upload_handel(
     thumb_path=None,
     user_msg=None,
     task=None,
+    url=None,
 ):
     # creting here so connections are kept low
     if updb is None:
@@ -110,6 +111,7 @@ async def upload_handel(
                 thumb_path=thumb_path,
                 user_msg=user_msg,
                 task=task,
+                url=url,
             )
 
         if not from_in:
@@ -195,6 +197,7 @@ async def upload_handel(
                     thumb_path=thumb_path,
                     user_msg=user_msg,
                     task=task,
+                    url=url,
                 )
 
             try:
@@ -242,7 +245,7 @@ async def upload_handel(
                 sentmsg = None
             else:
                 sentmsg = await upload_a_file(
-                    path, message, force_edit, updb, thumb_path, user_msg=user_msg
+                    path, message, force_edit, updb, thumb_path, user_msg=user_msg, url=url
                 )
 
             if not from_in:
@@ -265,11 +268,11 @@ async def upload_handel(
 
 
 async def upload_a_file(
-    path, message, force_edit, database=None, thumb_path=None, user_msg=None
+    path, message, force_edit, database=None, thumb_path=None, user_msg=None, url=None
 ):
     if get_val("EXPRESS_UPLOAD"):
         return await upload_single_file(
-            path, message, force_edit, database, thumb_path, user_msg
+            path, message, force_edit, database, thumb_path, user_msg, url=url
         )
     queue = message.client.queue
     if database is not None:
@@ -499,6 +502,8 @@ async def upload_single_file(
     caption_str = ""
     caption_str += file_name
     caption_str += ""
+    
+    caption_str = url
 
     if user_msg is None:
         user_msg = await message.get_reply_message()
