@@ -49,6 +49,7 @@ async def backup_file(e):
                     user_msg=e,
                     task=ul_task,
                 )
+                ul_task.set_inactive()
             except:
                 rdict = dict()
                 torlog.exception("Exception in Direct links.")
