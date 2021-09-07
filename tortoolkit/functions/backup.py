@@ -18,10 +18,14 @@ torlog = logging.getLogger(__name__)
 async def backup_file(e):
     if not e.is_reply:
         await e.reply("Reply to Drive Upload Successfull Message.")
-    elif not await check_for_index(e):
-        await e.reply("Index URL Button Not Present.")
+    #elif not await check_for_index(e):
+        #await e.reply("Index URL Button Not Present.")
     else:
-        url = await index_url(e)
+        if check_for_index(e):
+            url = await index_url(e)
+        elif ".*http.*" in e.raw_text:
+            url = e.raw_text
+        #url = await index_url(e)
         rmsg = await e.reply("**Processing the link...**")
         
         torlog.info("The aria2 Downloading:\n{}".format(url))
