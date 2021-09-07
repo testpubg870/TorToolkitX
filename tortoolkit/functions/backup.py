@@ -1,6 +1,7 @@
 import asyncio as aio
 import logging
 import shutil
+import os
 
 from .. import transfer
 from . import ariatools
