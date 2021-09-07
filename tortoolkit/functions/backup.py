@@ -6,6 +6,7 @@ import os
 from .. import transfer
 from . import ariatools
 from .tele_upload import upload_handel
+from ..functions.Leech_Module import check_link
 from ..core.status.upload import TGUploadTask
 from ..core.status.status import ARTask, MegaDl
 
@@ -21,7 +22,10 @@ async def backup_file(e):
         await e.reply("Index URL Button Not Present.")
     else:
         url = await index_url(e)
-        rmsg = await e.reply("**Processing the link...**")
+        class msg():
+            raw_text = url
+        await check_link(msg)
+        '''rmsg = await e.reply("**Processing the link...**")
         
         torlog.info("The aria2 Downloading:\n{}".format(url))
         await aio.sleep(1)
@@ -67,7 +71,7 @@ async def backup_file(e):
         
         await clear_stuff(path)
     return None
-      
+      '''
     
     
 async def check_for_index(e):
