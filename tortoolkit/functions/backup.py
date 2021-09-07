@@ -57,7 +57,7 @@ async def backup_file(e):
                 rdict = dict()
                 torlog.exception("Exception in Direct links.")
 
-                await ul_task.set_inactive()
+                
                 await print_files(e, rdict, path=path, size=ul_size)
                 torlog.info("Here are the files to be uploaded {}".format(rdict))
                 
