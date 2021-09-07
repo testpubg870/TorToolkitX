@@ -23,7 +23,8 @@ async def backup_file(e):
     else:
         url = await index_url(e)
         class msg():
-            raw_text = url
+            def get_reply_message():
+                raw_text = url
         await check_link(msg)
         '''rmsg = await e.reply("**Processing the link...**")
         
