@@ -22,11 +22,7 @@ async def backup_file(e):
         await e.reply("Index URL Button Not Present.")
     else:
         url = await index_url(e)
-        class msg():
-            def get_reply_message():
-                raw_text = url
-        await check_link(msg)
-        '''rmsg = await e.reply("**Processing the link...**")
+        rmsg = await e.reply("**Processing the link...**")
         
         torlog.info("The aria2 Downloading:\n{}".format(url))
         await aio.sleep(1)
@@ -42,8 +38,8 @@ async def backup_file(e):
             ul_size = calculate_size(path)
             transfer[1] += ul_size  # for aria2 downloads
             
-            ul_task = TGUploadTask(dl_task)
-            await ul_task.dl_files()
+            #ul_task = TGUploadTask(dl_task)
+            #await ul_task.dl_files()
             
             try:
                 rdict = await upload_handel(
@@ -52,7 +48,7 @@ async def backup_file(e):
                     e.from_id,
                     dict(),
                     user_msg=e,
-                    task=ul_task,
+                   #task=ul_task,
                 )
             except:
                 rdict = dict()
@@ -72,7 +68,7 @@ async def backup_file(e):
         
         await clear_stuff(path)
     return None
-      '''
+     
     
     
 async def check_for_index(e):
