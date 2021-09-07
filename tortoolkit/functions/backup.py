@@ -88,6 +88,13 @@ async def index_url(e):
             if s.text=="Index URL":
                 return s.url
             
+async def errored_message(e, reason):
+    msg = f"<a href='tg://user?id={e.sender_id}'>Done</a>\nYour Download Failed."
+    if reason is not None:
+        await reason.reply(msg, parse_mode="html")
+    else:
+        await e.reply(msg, parse_mode="html")
+            
 def calculate_size(path):
     if path is not None:
         try:
