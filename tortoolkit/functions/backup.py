@@ -5,7 +5,7 @@ import os
 
 from .. import transfer
 from . import ariatools
-from .tele_upload import upload_handel
+from .backup_tele_upload import upload_handel
 from ..functions.Leech_Module import check_link
 from ..core.status.upload import TGUploadTask
 from ..core.status.status import ARTask, MegaDl
@@ -38,8 +38,6 @@ async def backup_file(e):
             ul_size = calculate_size(path)
             transfer[1] += ul_size  # for aria2 downloads
             
-            #ul_task = TGUploadTask(dl_task)
-            #await ul_task.dl_files()
             
             try:
                 rdict = await upload_handel(
@@ -58,8 +56,7 @@ async def backup_file(e):
                 await print_files(e, rdict, path=path, size=ul_size)
                 torlog.info("Here are the files to be uploaded {}".format(rdict))
                 
-            ul_task.set_inactive()
-            print("Inactive")
+            
                 
         elif stat is False:
                 reason = await dl_task.get_error()
