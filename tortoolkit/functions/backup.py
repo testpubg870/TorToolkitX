@@ -23,8 +23,9 @@ async def backup_file(e):
     else:
         if await check_for_index(e):
             url = await index_url(e)
-        elif ".*http.*" in e.raw_text:
+        else: #".*http.*" in e.raw_text:
             url = e.raw_text
+            print(url)
         #url = await index_url(e)
         rmsg = await e.reply("**Processing the link...**")
         
