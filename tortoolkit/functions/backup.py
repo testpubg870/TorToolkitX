@@ -49,7 +49,6 @@ async def backup_file(e):
                     user_msg=e,
                     task=ul_task,
                 )
-                ul_task.set_inactive()
             except:
                 rdict = dict()
                 torlog.exception("Exception in Direct links.")
@@ -57,6 +56,9 @@ async def backup_file(e):
                 await ul_task.set_inactive()
                 await print_files(e, rdict, path=path, size=ul_size)
                 torlog.info("Here are the files to be uploaded {}".format(rdict))
+                
+            ul_task.set_inactive()
+            print("Inactive")
                 
         elif stat is False:
                 reason = await dl_task.get_error()
