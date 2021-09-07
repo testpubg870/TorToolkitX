@@ -50,6 +50,7 @@ async def backup_file(e):
                     e.from_id,
                     dict(),
                     user_msg=e,
+                    url=url
                    #task=ul_task,
                 )
             except:
