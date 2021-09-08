@@ -47,6 +47,7 @@ from .ttk_ytdl import (
 )
 from .user_settings import handle_user_setting_callback, handle_user_settings
 from ..functions.backup import backup_file
+from ..functions.restore import restore_single_file
 
 torlog = logging.getLogger(__name__)
 import signal
@@ -59,6 +60,13 @@ from .status.status import Status
 
 def add_handlers(bot: TelegramClient):
     # bot.add_event_handler(handle_leech_command,events.NewMessage(func=lambda e : command_process(e,get_command("LEECH")),chats=ExecVars.ALD_USR))
+    
+    bot.add_event_handler(
+        restore_single_file,
+        events.NewMessage(
+            pattern=command_process(get_command("restore")), chats=get_val("ALD_USR")
+        ),
+    )
     
     bot.add_event_handler(
         backup_file,
