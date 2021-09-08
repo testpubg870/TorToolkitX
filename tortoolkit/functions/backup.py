@@ -53,7 +53,7 @@ async def backup_file(e):
                     url=url
                    #task=ul_task,
                 )
-                await e.reply("Backup Complete.")
+                await rmsg.edit("Backup Complete.")
             except:
                 rdict = dict()
                 torlog.exception("Exception in Direct links.")
