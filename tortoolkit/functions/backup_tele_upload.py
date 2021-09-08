@@ -6,6 +6,7 @@ import os
 import shutil
 import time
 import traceback
+from urllib.parse import unquote
 
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
@@ -504,6 +505,7 @@ async def upload_single_file(
     caption_str += ""
     
     caption_str = url.replace(get_val("GD_INDEX_URL"),"")
+    caption_str = url_decode(caption_str)
 
     if user_msg is None:
         user_msg = await message.get_reply_message()
@@ -759,3 +761,8 @@ async def upload_single_file(
         sent_message.chat.id, ids=sent_message.message_id
     )
     return sent_message
+
+def url_decode(str):
+    while "%" in str:
+        str = unquote(str)
+    return str
