@@ -27,6 +27,7 @@ async def backup_file(e):
             url = (await e.get_reply_message()).raw_text
         #url = await index_url(e)
         rmsg = await e.reply("**Processing the link...**")
+        ormsg = rmsg
         
         torlog.info("The aria2 Downloading:\n{}".format(url))
         await aio.sleep(1)
@@ -53,7 +54,7 @@ async def backup_file(e):
                     url=url
                    #task=ul_task,
                 )
-                await rmsg.edit("Backup Complete.")
+                await ormsg.edit("Backup Complete.")
             except:
                 rdict = dict()
                 torlog.exception("Exception in Direct links.")
