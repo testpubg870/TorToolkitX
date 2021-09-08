@@ -64,7 +64,7 @@ def add_handlers(bot: TelegramClient):
     bot.add_event_handler(
         restore_single_file,
         events.NewMessage(
-            pattern=command_process(get_command("restore")), chats=get_val("ALD_USR")
+            pattern=command_process(get_command("RESTORE")), chats=get_val("ALD_USR")
         ),
     )
     
