@@ -9,7 +9,7 @@ async def restore_single_file(e):
     elif not await check_for_media(e):
         await e.reply("No Media In Replied Message.")
     else:
-        e.reply((await e.get_reply_message()).media)
+        e.reply("media found")
           
           
           
@@ -19,4 +19,3 @@ async def check_for_media(e):
         return False
     else:
         return True
-    return False
