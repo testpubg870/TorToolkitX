@@ -610,7 +610,8 @@ async def upload_single_file(
                     # quote=True,
                 )
             else:
-                sent_message = await message.reply_video(
+                sent_message = await thonmsg.client.pyro.send_video(
+                    chat_id=get_val("BACKUP_CHANNEL"),
                     video=path,
                     # quote=True,
                     parse_mode="html",
@@ -666,7 +667,8 @@ async def upload_single_file(
                     # quote=True,
                 )
             else:
-                sent_message = await message.reply_audio(
+                sent_message = await thonmsg.client.pyro.send_audio(
+                    chat_id=get_val("BACKUP_CHANNEL"),
                     audio=path,
                     # quote=True,
                     parse_mode="html",
