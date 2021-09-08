@@ -343,7 +343,7 @@ code_page = """
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Torrent Code Checker</title>
-    <link rel="icon" href="https://telegra.ph/file/69e1118355aac6913ab1b.jpg" type="image/jpg"> 
+    <link rel="icon" href="https://raw.githubusercontent.com/skr1405/A2Z-Shows-Website/main/images/favicon.png" type="image/jpg"> 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -366,11 +366,9 @@ code_page = """
     text-decoration: none;
     color: white;
 }
-
 body{
     background-color: #0D1117;
 }
-
 header{
     margin: 3vh 1vw;
     padding: 0.5rem 1rem 0.5rem 1rem;
@@ -382,45 +380,37 @@ header{
     background-color: #161B22;
     border: 2px solid rgba(255, 255, 255, 0.11);
 }
-
 header:hover, section:hover{
     box-shadow: 0px 0px 15px black;
 }
-
 .brand{
     display: flex;
     align-items: center;
 }
-
 img{ 
     width: 2.5rem;
     height: 2.5rem;
     border: 2px solid black;
     border-radius: 50%;
 }
-
 .name{
     color: white;
     margin-left: 1vw;
     font-size: 1.5rem;
 }
-
 .intro{
     text-align: center;
     margin-bottom: 2vh;
     margin-top: 1vh;
 }
-
 .social a{
     font-size: 1.5rem;
     color: white;
     padding-left: 1vw;
 }
-
 .social a:hover, .brand:hover{
     filter: invert(0.3);
 }
-
 section{
     margin: 0vh 1vw;
     margin-bottom: 10vh;
@@ -432,14 +422,12 @@ section{
     background-color: #161B22 ;
     color: white;
 }
-
 section form{
     display: flex;
     margin-left: auto;
     margin-right: auto;
     flex-direction: column;
 }
-
 section div{
     background-color: #0D1117;
     border-radius: 20px;
@@ -447,14 +435,12 @@ section div{
     padding: 0.7rem;
     margin-top: 2vh;
 }
-
 section label{
     font-size: larger;
     font-weight: 500;
     margin: 0 0 0.5vh 1.5vw;
     display: block;
 }
-
 section input[type="text"]{
     border-radius: 20px;
     outline: none;
@@ -466,11 +452,9 @@ section input[type="text"]{
     background-color: #3e475531;
     box-shadow: inset 0px 0px 10px black;
 }
-
 section input[type="text"]:focus{
     border-color: rgba(255, 255, 255, 0.404);
 }
-
 section button{
     border-radius: 20px;
     margin-top: 1vh;
@@ -484,11 +468,9 @@ section button{
     cursor: pointer;
     transition: background-color 200ms ease;
 }
-
 section button:hover, section button:focus{
     background-color: rgba(255, 255, 255, 0.068);
 }
-
 section span{
     display: block;
     font-size: x-small;
@@ -499,27 +481,22 @@ section span{
     margin-right: auto;
     margin-bottom: 2vh;
 }
-
 @media (max-width: 768px) {
     section form{
         flex-direction: column;
         width: 90vw;
     }
-
     section div{
         max-width: 100%;
         margin-bottom: 1vh;
     }
-
     section label{
         margin-left: 3vw;
         margin-top: 1vh;
     }
-
     section input[type="text"]{
         width: calc(100% - 0.3rem);
     }
-
     section button{
         width: 100%;
         height: 5vh;
@@ -527,7 +504,6 @@ section span{
         margin-left: auto;
         margin-right: auto;
     }
-
     section span{
         margin-left: 5%;
     }
@@ -535,20 +511,15 @@ section span{
     </style>
   </head>
 <body>
-   <!--© Designed and coded by @bipuldey19-Telegram-->
     <header>
       <div class="brand">
         <img
-          src="https://telegra.ph/file/69e1118355aac6913ab1b.jpg"
+          src="https://raw.githubusercontent.com/skr1405/A2Z-Shows-Website/main/images/favicon.png"
           alt="logo"
         />
-        <a href="https://t.me/Xcodershub">
-          <h2 class="name">TorToolkitX</h2>
+        <a href="https://t.me/a2z_leech">
+          <h2 class="name">A2Z LEECH</h2>
         </a>
-      </div>
-      <div class="social">
-        <a href="https://github.com/https://github.com/XcodersHub/TorToolkitX"><i class="fab fa-github"></i></a>
-        <a href="https://t.me/Xcodershub"><i class="fab fa-telegram"></i></a>
       </div>
     </header>
     <section>
