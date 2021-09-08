@@ -503,7 +503,7 @@ async def upload_single_file(
     caption_str += file_name
     caption_str += ""
     
-    caption_str = url
+    caption_str = url.replace(get_val("GD_INDEX_URL"),"")
 
     if user_msg is None:
         user_msg = await message.get_reply_message()
