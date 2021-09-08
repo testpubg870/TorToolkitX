@@ -128,5 +128,7 @@ async def clear_stuff(path):
             shutil.rmtree(path)
         else:
             os.remove(path)
+        torlog.warning("File(s) Deleted.")
     except:
+        torlog.warning("Failed to Delete File(s).")
         pass
