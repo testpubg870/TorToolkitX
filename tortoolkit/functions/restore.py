@@ -9,7 +9,7 @@ torlog = logging.getLogger(__name__)
 
 from .restore_progress import progress_for_pyrogram
 from ..core.getVars import get_val
-from .restore_rclone_upload import rclone_driver
+from .rclone_upload import rclone_driver
 
 async def restore_single_file(e):
     if not e.is_reply:
@@ -40,7 +40,7 @@ async def restore_single_file(e):
             path = path
         else:
             path = npath.replace(os.path.basename(path), "")
-        res = await rclone_driver(path, ormsg, omessage, opath)
+        res = await rclone_driver(path, ormsg, omessage, npath)
         if res is None:
             await e.reply(
                 "<b>UPLOAD TO DRIVE FAILED CHECK LOGS</b>",
