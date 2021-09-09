@@ -1,6 +1,7 @@
 import logging
 import os
 import time
+import asyncio as aio
 
 
 logging.getLogger("telethon").setLevel(logging.WARNING)
@@ -30,7 +31,7 @@ async def restore_single_file(e):
                                                                ))
         
         
-        clear_stuff(path)
+        await clear_stuff(path)
           
           
           
