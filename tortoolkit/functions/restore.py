@@ -36,7 +36,7 @@ async def restore_single_file(e):
                                                                      e.client.pyro
                                                                      ))
         
-        res = await rclone_driver(path, rmsg, omessage)
+        res = await rclone_driver(path, ormsg, omessage)
         if res is None:
             await e.reply(
                 "<b>UPLOAD TO DRIVE FAILED CHECK LOGS</b>",
