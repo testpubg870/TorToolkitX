@@ -9,7 +9,7 @@ torlog = logging.getLogger(__name__)
 
 from .restore_progress import progress_for_pyrogram
 from ..core.getVars import get_val
-from .rclone_upload import rclone_driver
+from .restore_rclone_upload import rclone_driver
 
 async def restore_single_file(e):
     if not e.is_reply:
