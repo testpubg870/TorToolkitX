@@ -18,7 +18,7 @@ from . import Human_Format
 torlog = logging.getLogger(__name__)
 
 
-async def rclone_driver(path, message, user_msg):
+async def rclone_driver(path, message, user_msg, opath):
     # this driver will need to do this
     # get the default drive
     conf_path = await get_config()
@@ -40,6 +40,7 @@ async def rclone_driver(path, message, user_msg):
                 rem_base,
                 edtime,
                 conf_path,
+                opath
             )
         except:
             torlog.exception("Stuff gone wrong in here")
@@ -48,7 +49,7 @@ async def rclone_driver(path, message, user_msg):
 
 # add user prompt here
 async def rclone_upload(
-    path, message, user_msg, dest_drive, dest_base, edit_time, conf_path
+    path, message, user_msg, dest_drive, dest_base, edit_time, conf_path, opath
 ):
     # this function will need a driver for him :o
     if not os.path.exists(path):
@@ -67,7 +68,7 @@ async def rclone_upload(
 
     if os.path.isdir(path):
         # handle dirs
-        new_dest_base = os.path.join(dest_base, path)
+        new_dest_base = os.path.join(dest_base, opath)
         # buffer size needs more testing though #todo
         if get_val("RSTUFF"):
             rclone_copy_cmd = [
