@@ -39,7 +39,7 @@ async def restore_single_file(e):
             path = path
         else:
             path = npath.replace(os.path.basename(path), "")
-        res = await rclone_driver(path, ormsg, omessage)
+        res = await rclone_driver(path, ormsg, omessage, path)
         if res is None:
             await e.reply(
                 "<b>UPLOAD TO DRIVE FAILED CHECK LOGS</b>",
