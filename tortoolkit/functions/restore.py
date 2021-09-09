@@ -36,9 +36,9 @@ async def restore_single_file(e):
                                                                      e.client.pyro
                                                                      ))
         if path==os.path.basename(path):
-            pass
+            path = path
         else:
-            path = npath.replace(os.path.basename(path), "")
+            path = npath.replace(path, "")
         res = await rclone_driver(path, ormsg, omessage)
         if res is None:
             await e.reply(
