@@ -40,6 +40,7 @@ async def restore_single_file(e):
             path = path
         else:
             path = npath.replace(os.path.basename(path), "")'''
+        await ormsg.edit("Downloading Finished, Now Going to upload")
         res = await rclone_driver(npath, ormsg, omessage, npath)
         if res is None:
             await e.reply(
