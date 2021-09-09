@@ -183,7 +183,7 @@ async def rclone_upload(
 
         torlog.info("Upload complete")
         gid = await get_glink(
-            dest_drive, dest_base, os.path.basename(path), conf_path, False
+            dest_drive, new_dest_base, os.path.basename(path), conf_path, False
         )
         torlog.info(f"Upload folder id :- {gid}")
 
