@@ -20,8 +20,8 @@ async def restore_single_file(e):
         start_time = time.time()
         tout = get_val("EDIT_SLEEP_SECS")
         path = (await e.get_reply_message()).raw_text
-        reply_message = (await e.get_reply_message()).media
-        send_message = await rmsg.client.pyro.download_media(reply_message,
+        file_id = (await e.get_reply_message()).file.id
+        send_message = await rmsg.client.pyro.download_media(file_id,
                                                                       file_name=path,
                                                                       progress=progress_for_pyrogram,
                                                                       progress_args=(os.path.basename(path),
