@@ -17,6 +17,7 @@ async def restore_single_file(e):
         await e.reply("No Media In Replied Message.")
     else:
         rmsg = await e.reply("Processing Media.")
+        ormsg = rmsg
         rmsg = await rmsg.client.pyro.get_messages(rmsg.chat_id, rmsg.id)
         start_time = time.time()
         tout = get_val("EDIT_SLEEP_SECS")
@@ -25,7 +26,7 @@ async def restore_single_file(e):
         message = await message.client.pyro.get_messages(message.chat_id, message.id)
         '''file_id = (await e.get_reply_message())
         await file_id.download_media(file=path, progress_callback=cb)'''
-        path = await rmsg.client.pyro.download_media(message,
+        path = await ormsg.client.pyro.download_media(message,
                                                                       file_name=path,
                                                                       progress=progress_for_pyrogram,
                                                                       progress_args=(os.path.basename(path),
