@@ -41,9 +41,9 @@ async def restore_single_file(e):
                 "<b>UPLOAD TO DRIVE FAILED CHECK LOGS</b>",
                  parse_mode="html",
                 )
-            await ormsg.edit_text("Restore Failed.")
+            await ormsg.edit("Restore Failed.")
         else:
-            await ormsg.edit_text("Restore Complete.\nUpload to Drive Successful")
+            await ormsg.edit("Restore Complete.\nUpload to Drive Successful")
             
         await clear_stuff(path)
           
