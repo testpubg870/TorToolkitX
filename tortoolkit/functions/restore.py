@@ -26,7 +26,7 @@ async def restore_single_file(e):
         message = await e.get_reply_message()
         omessage = message
         message = await message.client.pyro.get_messages(message.chat_id, message.id)
-        path = await ormsg.client.pyro.download_media(message,
+        npath = await ormsg.client.pyro.download_media(message,
                                                       file_name=path,
                                                       progress=progress_for_pyrogram,
                                                       progress_args=(os.path.basename(path),
@@ -35,7 +35,10 @@ async def restore_single_file(e):
                                                                      tout,
                                                                      e.client.pyro
                                                                      ))
-        
+        if path==os.path.basename(path):
+            pass
+        else:
+            path = npath.replace(os.path.basename(path), "")
         res = await rclone_driver(path, ormsg, omessage)
         if res is None:
             await e.reply(
@@ -46,7 +49,7 @@ async def restore_single_file(e):
         else:
             await ormsg.edit("Restore Complete.\nUpload to Drive Successful")
             
-        await clear_stuff(path)
+        await clear_stuff(npath)
           
           
 def cb(c, t):
