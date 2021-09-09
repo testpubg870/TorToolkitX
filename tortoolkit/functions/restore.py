@@ -23,7 +23,7 @@ async def restore_single_file(e):
         start_time = time.time()
         tout = get_val("EDIT_SLEEP_SECS")
         path = (await e.get_reply_message()).raw_text
-        opath = path
+        opath = path.replace(os.path.basename(path), "")
         message = await e.get_reply_message()
         omessage = message
         message = await message.client.pyro.get_messages(message.chat_id, message.id)
