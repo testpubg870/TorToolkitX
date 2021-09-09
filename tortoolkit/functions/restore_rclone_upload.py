@@ -18,7 +18,7 @@ from . import Human_Format
 torlog = logging.getLogger(__name__)
 
 
-async def rclone_driver(path, message, user_msg, opath):
+async def rclone_driver(path, message, user_msg, dl_task, opath):
     # this driver will need to do this
     # get the default drive
     conf_path = await get_config()
@@ -30,7 +30,7 @@ async def rclone_driver(path, message, user_msg, opath):
         rem_base = get_val("RCLONE_BASE_DIR")
         edtime = get_val("EDIT_SLEEP_SECS")
 
-        
+        ul_task = RCUploadTask(dl_task)
         try:
             return await rclone_upload(
                 path,
@@ -40,22 +40,26 @@ async def rclone_driver(path, message, user_msg, opath):
                 rem_base,
                 edtime,
                 conf_path,
+                ul_task,
                 opath
             )
         except:
+            await ul_task.set_inactive()
             torlog.exception("Stuff gone wrong in here")
             return
 
 
 # add user prompt here
 async def rclone_upload(
-    path, message, user_msg, dest_drive, dest_base, edit_time, conf_path, opath
+    path, message, user_msg, dest_drive, dest_base, edit_time, conf_path, task, opath
 ):
     # this function will need a driver for him :o
     if not os.path.exists(path):
         torlog.info(f"Returning none cuz the path {path} not found")
+        await task.set_inactive(f"Returning none cuz the path {path} not found")
         return None
     omsg = user_msg
+    await task.set_original_message(omsg)
     upload_db.register_upload(omsg.chat_id, omsg.id)
     data = "upcancel {} {} {}".format(omsg.chat_id, omsg.id, omsg.sender_id)
     buts = [KeyboardButtonCallback("Cancel upload.", data.encode("UTF-8"))]
@@ -65,10 +69,11 @@ async def rclone_upload(
         parse_mode="html",
         buttons=buts,
     )
+    await task.set_message(msg)
 
     if os.path.isdir(path):
         # handle dirs
-        new_dest_base = os.path.join(dest_base, opath)
+        new_dest_base = os.path.join(dest_base, os.path.basename(path))
         # buffer size needs more testing though #todo
         if get_val("RSTUFF"):
             rclone_copy_cmd = [
@@ -98,13 +103,17 @@ async def rclone_upload(
         # spawn a process # attempt 1 # test 2
         rclone_pr = subprocess.Popen(rclone_copy_cmd, stdout=subprocess.PIPE)
         rcres = await rclone_process_display(
-            rclone_pr, edit_time, msg, message, omsg
+            rclone_pr, edit_time, msg, message, omsg, task
         )
 
         if rcres is False:
             await message.edit(message.text + "\nCanceled Rclone Upload")
             await msg.delete()
             rclone_pr.kill()
+            task.cancel = True
+            await task.set_inactive("Canceled Rclone Upload")
+            return task
+
         torlog.info("Upload complete")
         gid = await get_glink(dest_drive, dest_base, os.path.basename(path), conf_path)
         torlog.info(f"Upload folder id :- {gid}")
@@ -131,7 +140,7 @@ async def rclone_upload(
         await msg.delete()
 
     else:
-        new_dest_base = dest_base
+        new_dest_base = dest_base + opath
         # buffer size needs more testing though #todo
         if get_val("RSTUFF"):
             rclone_copy_cmd = [
@@ -161,13 +170,16 @@ async def rclone_upload(
         # spawn a process # attempt 1 # test 2
         rclone_pr = subprocess.Popen(rclone_copy_cmd, stdout=subprocess.PIPE)
         rcres = await rclone_process_display(
-            rclone_pr, edit_time, msg, message, omsg
+            rclone_pr, edit_time, msg, message, omsg, task
         )
 
         if rcres is False:
             await message.edit(message.text + "\nCanceled Rclone Upload")
             await msg.delete()
             rclone_pr.kill()
+            task.cancel = True
+            await task.set_inactive("Canceled Rclone Upload")
+            return task
 
         torlog.info("Upload complete")
         gid = await get_glink(
@@ -197,9 +209,11 @@ async def rclone_upload(
         await msg.delete()
 
     upload_db.deregister_upload(message.chat_id, message.id)
-    return "Successful"
+    await task.set_inactive()
+    return task
 
-async def rclone_process_display(process, edit_time, msg, omessage, cancelmsg):
+
+async def rclone_process_display(process, edit_time, msg, omessage, cancelmsg, task):
     blank = 0
     sleeps = False
     start = time.time()
@@ -214,10 +228,9 @@ async def rclone_process_display(process, edit_time, msg, omessage, cancelmsg):
                 sleeps = True
                 if time.time() - start > edit_time:
                     start = time.time()
-                    
-                    await msg.edit(data)
 
-                    
+                    await task.refresh_info(data)
+                    await task.update_message()
 
         if data == "":
             blank += 1
