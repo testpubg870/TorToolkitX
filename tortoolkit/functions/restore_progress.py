@@ -78,12 +78,12 @@ async def progress_for_pyrogram(
         try:
             if not message.photo:
                 await message.edit_text(
-                    text="**Uploading:** `{}`\n{}".format(ud_type, tmp),
+                    text="**Downloading:** `{}`\n{}".format(ud_type, tmp),
                     reply_markup=markup,
                 )
             else:
                 await message.edit_caption(
-                    caption="**Uploading:** `{}`\n{}".format(ud_type, tmp),
+                    caption="**Downloading:** `{}`\n{}".format(ud_type, tmp),
                     reply_markup=markup,
                 )
             await asyncio.sleep(4)
