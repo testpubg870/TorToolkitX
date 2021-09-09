@@ -215,7 +215,7 @@ async def rclone_process_display(process, edit_time, msg, omessage, cancelmsg):
                 if time.time() - start > edit_time:
                     start = time.time()
                     
-                    msg.edit(data)
+                    await msg.edit(data)
 
                     
 
