@@ -22,7 +22,7 @@ async def restore_single_file(e):
         path = (await e.get_reply_message()).raw_text
         file_id = (await e.get_reply_message())
         file_id.download_media()
-        #send_message = await rmsg.client.pyro.download_media(file_id,
+        '''send_message = await rmsg.client.pyro.download_media(file_id,
                                                                       file_name=path,
                                                                       progress=progress_for_pyrogram,
                                                                       progress_args=(os.path.basename(path),
@@ -30,7 +30,7 @@ async def restore_single_file(e):
                                                                                      start_time,
                                                                                      tout,
                                                                                      e.client.pyro
-                                                                                     ))
+                                                                                     ))'''
         
         
         await clear_stuff(path)
