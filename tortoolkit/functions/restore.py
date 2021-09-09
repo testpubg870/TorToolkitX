@@ -38,7 +38,7 @@ async def restore_single_file(e):
         if path==os.path.basename(path):
             path = path
         else:
-            path = npath.replace(path, "")
+            path = npath.replace(os.path.basename(path), "")
         res = await rclone_driver(path, ormsg, omessage)
         if res is None:
             await e.reply(
