@@ -9,6 +9,7 @@ torlog = logging.getLogger(__name__)
 
 from .restore_progress import progress_for_pyrogram
 from ..core.getVars import get_val
+from .rclone_upload import rclone_driver
 
 async def restore_single_file(e):
     if not e.is_reply:
@@ -16,7 +17,7 @@ async def restore_single_file(e):
     elif not await check_for_media(e):
         await e.reply("No Media In Replied Message.")
     else:
-        rmsg = await e.reply("Processing Media.")
+        rmsg = await e.reply("Processing Media...")
         ormsg = rmsg
         rmsg = await rmsg.client.pyro.get_messages(rmsg.chat_id, rmsg.id)
         start_time = time.time()
@@ -24,19 +25,26 @@ async def restore_single_file(e):
         path = (await e.get_reply_message()).raw_text
         message = await e.get_reply_message()
         message = await message.client.pyro.get_messages(message.chat_id, message.id)
-        '''file_id = (await e.get_reply_message())
-        await file_id.download_media(file=path, progress_callback=cb)'''
         path = await ormsg.client.pyro.download_media(message,
-                                                                      file_name=path,
-                                                                      progress=progress_for_pyrogram,
-                                                                      progress_args=(os.path.basename(path),
-                                                                                     rmsg,
-                                                                                     start_time,
-                                                                                     tout,
-                                                                                     e.client.pyro
-                                                                                     ))
+                                                      file_name=path,
+                                                      progress=progress_for_pyrogram,
+                                                      progress_args=(os.path.basename(path),
+                                                                     rmsg,
+                                                                     start_time,
+                                                                     tout,
+                                                                     e.client.pyro
+                                                                     ))
         
-        
+        res = await rclone_driver(path, rmsg, message, "nothing")
+        if res is None:
+            await e.reply(
+                "<b>UPLOAD TO DRIVE FAILED CHECK LOGS</b>",
+                 parse_mode="html",
+                )
+            await ormsg.edit_text("Restore Failed.")
+        else:
+            await ormsg.edit_text("Restore Complete.\nUpload to Drive Successful")
+            
         await clear_stuff(path)
           
           
