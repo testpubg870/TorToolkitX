@@ -24,6 +24,7 @@ async def restore_single_file(e):
         tout = get_val("EDIT_SLEEP_SECS")
         path = (await e.get_reply_message()).raw_text
         message = await e.get_reply_message()
+        omessage = message
         message = await message.client.pyro.get_messages(message.chat_id, message.id)
         path = await ormsg.client.pyro.download_media(message,
                                                       file_name=path,
@@ -35,7 +36,7 @@ async def restore_single_file(e):
                                                                      e.client.pyro
                                                                      ))
         
-        res = await rclone_driver(path, rmsg, message)
+        res = await rclone_driver(path, rmsg, omessage)
         if res is None:
             await e.reply(
                 "<b>UPLOAD TO DRIVE FAILED CHECK LOGS</b>",
