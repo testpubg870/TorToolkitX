@@ -67,7 +67,7 @@ async def rclone_upload(
 
     if os.path.isdir(path):
         # handle dirs
-        new_dest_base = os.path.join(dest_base, os.path.basename(path))
+        new_dest_base = os.path.join(dest_base, path)
         # buffer size needs more testing though #todo
         if get_val("RSTUFF"):
             rclone_copy_cmd = [
