@@ -197,6 +197,7 @@ async def rclone_upload(
         await msg.delete()
 
     upload_db.deregister_upload(message.chat_id, message.id)
+    return "Successful"
 
 async def rclone_process_display(process, edit_time, msg, omessage, cancelmsg):
     blank = 0
