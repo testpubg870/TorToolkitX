@@ -953,7 +953,7 @@ async def booted(client):
     try:
     	msg = await client.send_message(bchannel, "I am Ready!")
     	mssg = await client.send_message(oid, "Message Sent to Backup Channel.")
-    	await mssg.edit("Message Sent and Deleted From Backup Channel.")
+    	#await mssg.edit("Message Sent and Deleted From Backup Channel.")
     except Exception:
     	torlog.info(f"Can't Send Message to Backup Channel.")
 
