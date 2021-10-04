@@ -116,3 +116,15 @@ async def generate_directs(url):
             return dl_link
         else:
             return "**ERROR:** Cant't download, {}.".format(restext["value"])
+            
+    elif "bayfiles.com" in url or "anonfiles.com" in url:
+    	try:
+    		async with aiohttp.ClientSession() as ttksess:
+    		          resp = await ttksess.get(link)
+    		          restext = await resp.text()
+    		bss2 = BeautifulSoup(restext, "html.parser")
+    		ourl = bss2.find(id="download-url")["href"]
+    		return ourl
+    	except:
+    		return "**ERROR:** Can't Download, Check Your URL!"
+
