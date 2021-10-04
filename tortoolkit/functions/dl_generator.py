@@ -120,7 +120,7 @@ async def generate_directs(url):
     elif "bayfiles.com" in url or "anonfiles.com" in url:
     	try:
     		async with aiohttp.ClientSession() as ttksess:
-    		          resp = await ttksess.get(link)
+    		          resp = await ttksess.get(url)
     		          restext = await resp.text()
     		bss2 = BeautifulSoup(restext, "html.parser")
     		ourl = bss2.find(id="download-url")["href"]
