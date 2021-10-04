@@ -943,19 +943,11 @@ def term_handler(signum, frame, client):
 
 async def booted(client):
     chats = get_val("ALD_USR")
-    bchannel = get_val("BACKUP_CHANNEL")
-    oid = get_val("OWNER_ID")
     for i in chats:
         try:
             await client.send_message(i, "The bot is booted and is ready to use.")
         except Exception:
             torlog.info(f"Not found the entity {i}")
-    try:
-    	msg = await client.send_message(bchannel, "I am Ready!")
-    	mssg = await client.send_message(oid, "Message Sent to Backup Channel.")
-    	#await mssg.edit("Message Sent and Deleted From Backup Channel.")
-    except Exception:
-    	torlog.info(f"Can't Send Message to Backup Channel.")
 
 
 def command_process(command):
