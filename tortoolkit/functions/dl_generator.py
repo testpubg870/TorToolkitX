@@ -126,7 +126,7 @@ async def generate_directs(url):
     		bss2 = BeautifulSoup(restext, "html.parser")
     		if (ourl := bss2.find(id="download-url")["href"]):
     			return ourl
-    		elif (err := soup.find(id='error-container')):
+    		elif (err := bss2.find(id='error-container')):
     			return "**ERROR:** " + (err.get_text()).strip()
     			
     	except:
