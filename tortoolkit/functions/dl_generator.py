@@ -140,9 +140,12 @@ async def generate_directs(url):
     		async  with aiohttp.ClientSession() as ttksess:
     		          resp = await ttksess.get(url)
     		          restext = await resp.text()
-    		if (fileid := re.search("showFileInformation\((.*)\)", restext)):
-    			return 'https://letsupload.io/account/direct_download/' + fileid.group(1)
-    		elif (nurl := re.search(r"window.location = '(.*)'", restext)):
-    			await generate_directs(nurl)
+    		          nurl = re.search("window.location = '(.*)'", restext).group(1)
+    		          resp = await ttksess.get(nurl)
+    		          restext = await resp.text()
+    		          fileid = re.search("showFileInformation\((.*)\)", restext).group(1)
+    		          return 'https://letsupload.io/account/direct_download/' + fileid
     	except:
     		return "**ERROR:** Can't Download, Check Your URL!"
+    		
+    		
