@@ -124,8 +124,8 @@ async def generate_directs(url):
     		          resp = await ttksess.get(url)
     		          restext = await resp.text()
     		bss2 = BeautifulSoup(restext, "html.parser")
-    		if (ourl := bss2.find(id="download-url")["href"]):
-    			return ourl
+    		if (ourl := bss2.find(id="download-url")):
+    			return ourl["href"]
     		elif (err := bss2.find(id="error-container")):
     			return "**ERROR:** " + (err.get_text()).strip()
     			
