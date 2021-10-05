@@ -117,14 +117,17 @@ async def generate_directs(url):
         else:
             return "**ERROR:** Cant't download, {}.".format(restext["value"])
             
+    # bayfiles.com and anonfiles.com
     elif "bayfiles.com" in url or "anonfiles.com" in url:
     	try:
     		async with aiohttp.ClientSession() as ttksess:
     		          resp = await ttksess.get(url)
     		          restext = await resp.text()
     		bss2 = BeautifulSoup(restext, "html.parser")
-    		ourl = bss2.find(id="download-url")["href"]
-    		return ourl
+    		if (ourl := bss2.find(id="download-url")["href"]):
+    			return ourl
+    		elif (err := soup.find(id='error-container')):
+    			return "**ERROR:** " + (err.get_text()).strip()
+    			
     	except:
     		return "**ERROR:** Can't Download, Check Your URL!"
-
