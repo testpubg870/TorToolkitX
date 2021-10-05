@@ -135,7 +135,7 @@ async def generate_directs(url):
     # letsupload.co and letsupload.io
     elif "letsupload.co" in url or "letsupload.io" in url:
     	if "letsupload.co" in url:
-    		url = url.replace("letsupload.io", "letsupload.co")
+    		url = url.replace("letsupload.co", "letsupload.io")
     	try:
     		async  with aiohttp.ClientSession() as ttksess:
     		          resp = await ttksess.get(url)
