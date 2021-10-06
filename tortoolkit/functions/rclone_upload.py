@@ -204,8 +204,8 @@ async def rclone_upload(
         ul_size = calculate_size(path)
         transfer[0] += ul_size
         ul_size = Human_Format.human_readable_bytes(ul_size)
-        txtmsg = "<a href='tg://user?id={}'>Done</a>\n#uploads\nUploaded Size:- {}\nUPLOADED FILE :-<code>{}</code>\nTo Drive.".format(
-            omsg.sender_id, ul_size, os.path.basename(path)
+        txtmsg = "<a href='tg://user?id={}'>Done</a>\n#uploads\nUploaded Size:- {}\nUPLOADED FILE :-<code>{}</code>\nTo Drive.\nIndex URL :- <code>{}</code>".format(
+            omsg.sender_id, ul_size, os.path.basename(path), index_link
         )
 
         await omsg.reply(txtmsg, buttons=buttons, parse_mode="html")
@@ -247,7 +247,7 @@ async def rclone_process_display(process, edit_time, msg, omessage, cancelmsg, t
                 return False
 
             sleeps = False
-            await aio.sleep(2)
+            #await aio.sleep(2)
             process.stdout.flush()
 
 
