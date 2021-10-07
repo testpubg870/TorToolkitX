@@ -150,7 +150,7 @@ async def generate_directs(url):
     	except:
     		return "**ERROR:** Can't Download, Check Your URL!"
     		
-    #clicknupload.cc
+    #clicknupload
     elif "clicknupload." in url:
     	try:
     		async with aiohttp.ClientSession() as ttksess:
