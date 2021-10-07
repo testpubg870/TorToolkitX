@@ -162,7 +162,7 @@ async def generate_directs(url):
     		          form = bss2.find('form').findAll('input')
     		          data = ""
     		          for i in form:
-    		          	data += "{}={}".format(i['name'], i['value'])
+    		          	data += "{}={}".format(i['name'], urllib.parse.quote(i['value']))
     		          	if i!=form[len(form)-1]:
     		          		data += "&"
     		          resp = await ttksess.post(url, data=data, headers={'content-type':'application/x-www-form-urlencoded'})
@@ -181,7 +181,7 @@ async def generate_directs(url):
     		          data = ""
     		          for i in fields:
     		          	try:
-    		          		val = i['value']
+    		          		val = urllib.parse.quote(i['value'])
     		          	except:
     		          		val = ""
     		          		if i['name'] == "code":
