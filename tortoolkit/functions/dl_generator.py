@@ -150,8 +150,10 @@ async def generate_directs(url):
     	except:
     		return "**ERROR:** Can't Download, Check Your URL!"
     		
-    #clicknupload
+    #clicknupload.co, clicknupload.cc
     elif "clicknupload." in url:
+    	if "clicknupload.co" in url:
+    		url = url.replace("clicknupload.co", "clicknupload.cc")
     	try:
     		async with aiohttp.ClientSession() as ttksess:
     		          resp = await ttksess.get(url)
@@ -195,5 +197,4 @@ async def generate_directs(url):
     		          return re.search("'(.*)'", dlbtn['onclick']).group(1)
     	except:
     		return "**ERROR:** Can't Download, Check Your URL!"
-
 
