@@ -1,5 +1,5 @@
 import logging
-import re
+import re, time
 import urllib.parse
 
 import aiohttp
@@ -139,7 +139,7 @@ async def generate_directs(url):
     	if "letsupload.to" in url:
     		url = url.replace("letsupload.to", "letsupload.io")
     	try:
-    		async  with aiohttp.ClientSession() as ttksess:
+    		async with aiohttp.ClientSession() as ttksess:
     		          resp = await ttksess.get(url)
     		          restext = await resp.text()
     		          nurl = re.search("window.location = '(.*)'", restext).group(1)
@@ -150,4 +150,50 @@ async def generate_directs(url):
     	except:
     		return "**ERROR:** Can't Download, Check Your URL!"
     		
-    		
+    #clicknupload.cc
+    elif "clicknupload.cc" in url:
+    	try:
+    		async with aiohttp.ClientSession() as ttksess:
+    		          resp = await ttksess.get(url)
+    		          restext = await resp.text()
+    		          bss2 = BeautifulSoup(restext, "html.parser")
+    		          form = bss2.find('form').findAll('input')
+    		          data = ""
+    		          for i in form:
+    		          	data += "{}={}".format(i['name'], i['value'])
+    		          	if i!=form[len(form)-1]:
+    		          		data += "&"
+    		          resp = await ttksess.post(url, data=data, headers={'content-type':'application/x-www-form-urlencoded'})
+    		          restext = await resp.text()
+    		          bss2 = BeautifulSoup(restext, "html.parser")
+    		          form = bss2.find('form')
+    		          fields = form.findAll('input')
+    		          wait = int(form.find('span').find('span').get_text())
+    		          ecode = (form.find('td').findAll('td')[1].findAll('span'))
+    		          dcode  = {}
+    		          for i in ecode:
+    		          	dcode[int(re.search("padding-left:(\d+)px", str(i))[1])] = i.get_text()
+    		          code = ""
+    		          for i in sorted(dcode):
+    		          	code +=(dcode[i])
+    		          data = ""
+    		          for i in fields:
+    		          	try:
+    		          		val = i['value']
+    		          	except:
+    		          		val = ""
+    		          		if i['name'] == "code":
+    		          			val = code
+    		          	data += "{}={}".format(i['name'], val)
+    		          	if i!=fields[len(fields)-1]:
+    		          		data += "&"
+    		          time.sleep(wait)
+    		          resp = await ttksess.post(url, data=data, headers={'content-type':'application/x-www-form-urlencoded'})
+    		          restext = await resp.text()
+    		          bss2 = BeautifulSoup(restext, "html.parser")
+    		          dlbtn = bss2.find(id="downloadbtn")
+    		          return re.search("'(.*)'", dlbtn['onclick']).group(1)
+    	except:
+    		return "**ERROR:** Can't Download, Check Your URL!"
+
+
