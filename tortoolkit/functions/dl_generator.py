@@ -151,7 +151,7 @@ async def generate_directs(url):
     		return "**ERROR:** Can't Download, Check Your URL!"
     		
     #clicknupload.cc
-    elif "clicknupload.cc" in url:
+    elif "clicknupload." in url:
     	try:
     		async with aiohttp.ClientSession() as ttksess:
     		          resp = await ttksess.get(url)
