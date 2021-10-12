@@ -244,7 +244,7 @@ async def rclone_process_display(process, edit_time, msg, omessage, cancelmsg, t
                 return False
 
             sleeps = False
-            await aio.sleep(2)
+            #await aio.sleep(2)
             process.stdout.flush()
 
 
