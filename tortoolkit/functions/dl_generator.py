@@ -12,7 +12,6 @@ async def generate_directs(url):
     # blocklinks
     if (
         "mega.nz" in url
-        or "drive.google.com" in url
         or "uptobox.com" in url
         or "1fiecher.com" in url
         or "googleusercontent.com" in url
@@ -197,4 +196,23 @@ async def generate_directs(url):
     		          return re.search("'(.*)'", dlbtn['onclick']).group(1)
     	except:
     		return "**ERROR:** Can't Download, Check Your URL!"
+    		
+    #drive.google.com
+    elif "drive.google.com" in url:
+    	try:
+    		if "drive.google.com/file/d" in url:
+    			fileid = re.search("drive.google.com/file/d/(.*)/", url).group(1)
+    			url = "https://drive.google.com/uc?export=download&id={}".format(fileid)
+    			baseurl = urllib.parse.urljoin(url, ".")[:-1]
+    			async with aiohttp.ClientSession() as ttksess:
+    			         resp = await ttksess.get(url)
+    			         restext = await resp.text()
+    			         bss2 = BeautifulSoup(restext, "html.parser")
+    			         path = bss2.find(id="uc-download-link")["href"]
+    			         return baseurl + path
+    		else:
+    			return "**ERROR:** Can't Download, Send Shareable Link!"
+    	except:
+    		return "**ERROR:** Can't Download, Check Your URL!"
+
 
