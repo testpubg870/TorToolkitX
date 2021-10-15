@@ -14,7 +14,6 @@ async def generate_directs(url):
         "mega.nz" in url
         or "drive.google.com" in url
         or "uptobox.com" in url
-        or "1fiecher.com" in url
         or "googleusercontent.com" in url
     ):
         return "**ERROR:** Unsupported URL!"
@@ -197,4 +196,63 @@ async def generate_directs(url):
     		          return re.search("'(.*)'", dlbtn['onclick']).group(1)
     	except:
     		return "**ERROR:** Can't Download, Check Your URL!"
-    		
+    
+    #1fichier.com
+    elif "1fichier.com" in url:
+    	if "::" in url:
+    		password = url.split("::")[1]
+    		link = url.split("::")[0]
+    	else:
+    		link = url
+    		password = None
+    	try:
+    		if password is None:
+    			async with aiohttp.ClientSession() as ttksess:
+    				resp = await ttksess.post(link)
+    				restext = await resp.text()
+    		else:
+    			data = {"pass": password}
+    			async with aiohttp.ClientSession() as ttksess:
+    				resp = await ttksess.post(link, data=data, headers={'content-type':'application/x-www-form-urlencoded'})
+    				restext = await resp.text()
+    	except:
+    		return "**ERROR:** Can't Reach 1fichier Servers."
+    	bss2 = BeautifulSoup(restext, "html.parser")
+    	if bss2.find("a", {"class":"ok btn-general btn-orange"}) is not None:
+    		dl_btn = bss2.find("a", {"class": "ok btn-general btn-orange"})
+    		if dl_btn["href"] == None:
+    			return "**ERROR:** Unable to Generate Direct Link!"
+    		else:
+    			return dl_btn["href"]
+    			
+    	elif len(bss2.find_all("div", {"class": "ct_warn"})) == 2:
+    	   str_2 = bss2.find_all("div", {"class": "ct_warn"})[1]
+    	   if "you must wait" in str(str_2).lower():
+    	       numbers = [int(word) for word in str(str_2).split() if word.isdigit()]
+    	       if not numbers:
+    	           return "**ERROR:** 1fichier is on a limit. Please wait a few minutes/hour."
+    	       else:
+    	           return "**ERROR:** 1fichier is on a limit. Please wait {} minute.".format(numbers[0])
+    	   elif "protect access" in str(str_2).lower():
+    	     return "**ERROR:** This link requires a password!\n\n**This link requires a password!**\n- Insert sign **::** after the link and write the password after the sign.\n\n**Example:**\n`https://1fichier.com/?example::love you`\n\nNo spaces between the signs **::**\nFor the password, you can use a space!"
+    	   else:
+    	       return "**ERROR:** Error trying to generate Direct Link from 1fichier!"
+    	       
+    	elif len(bss2.find_all("div", {"class": "ct_warn"})) == 3:
+    	   str_1 = bss2.find_all("div", {"class": "ct_warn"})[-2]
+    	   str_3 = bss2.find_all("div", {"class": "ct_warn"})[-1]
+    	   if "you must wait" in str(str_1).lower():
+    	       numbers = [int(word) for word in str(str_1).split() if word.isdigit()]
+    	       if not numbers:
+    	           return "**ERROR:** 1fichier is on a limit. Please wait a few minutes/hour."
+    	       else:
+    	           return "**ERROR:** 1fichier is on a limit. Please wait {} minute.".format(numbers[0])
+    	   elif "bad password" in str(str_3).lower():
+    	     return "**ERROR:** The password you entered is wrong!"
+    	   else:
+    	       return "**ERROR:** Error trying to generate Direct Link from 1fichier!"
+    	else:
+    		return "**ERROR:** Error trying to generate Direct Link from 1fichier!"
+
+
+
