@@ -129,7 +129,7 @@ async def extract_archive(path, password=""):
                 extpath = os.path.join(userpath, str(time.time()).replace(".", ""))
                 os.mkdir(extpath)
 
-                extpath = os.path.join(extpath, os.path.basename(path))
+                extpath = os.path.join(extpath, os.path.splitext(os.path.basename(path))[0])
                 if not os.path.exists(extpath):
                     os.mkdir(extpath)
 
