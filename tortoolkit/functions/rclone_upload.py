@@ -117,6 +117,7 @@ async def rclone_upload(
             await task.set_inactive("Canceled Rclone Upload")
             return task
 
+        await aio.sleep(2)
         torlog.info("Upload complete")
         gid = await get_glink(dest_drive, dest_base, os.path.basename(path), conf_path)
         torlog.info(f"Upload folder id :- {gid}")
@@ -184,6 +185,7 @@ async def rclone_upload(
             await task.set_inactive("Canceled Rclone Upload")
             return task
 
+        await aio.sleep(2)
         torlog.info("Upload complete")
         gid = await get_glink(
             dest_drive, dest_base, os.path.basename(path), conf_path, False
