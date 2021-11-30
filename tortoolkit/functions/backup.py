@@ -18,8 +18,22 @@ torlog = logging.getLogger(__name__)
 async def backup_file(e):
     if not e.is_reply:
         await e.reply("Reply to Drive Upload Successfull Message.")
-    #elif not await check_for_index(e):
-        #await e.reply("Index URL Button Not Present.")
+    elif check_for_noe(e): #Check for number of episodes
+        noe = int(e.raw_text.split(" ")[1])
+        e.raw_text = ""
+        raw_url = (await e.get_reply_message()).raw_text
+        lod = 0
+        dollar = "$"
+        result = 0
+        while result != -1:
+        	result = raw_text.find(dollar)
+        	if result != -1:
+        		#length of dollar
+        		lod += 1
+        		dollar += "$"
+        for i in range(1, noe+1):
+        	(await e.get_reply_message()).raw_text = raw_url.replace("$"*lenght_of_dollar, "{:0{}}".format(i, lenght_of_dollar))
+        	await backup_file(e)
     else:
         if await check_for_index(e):
             url = await index_url(e)
@@ -83,7 +97,15 @@ async def check_for_index(e):
             if s.text=="Index URL":
                 return True
     return False
+
   
+async def check_for_noe(e):
+      try:
+      	if e.raw_text.split(" ")[1].isdigit():
+      		return True
+      except:
+      	return False
+                
   
 async def index_url(e):
     for i in (await e.get_reply_message()).buttons:
