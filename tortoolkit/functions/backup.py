@@ -18,7 +18,7 @@ torlog = logging.getLogger(__name__)
 async def backup_file(e):
     if not e.is_reply:
         await e.reply("Reply to Drive Upload Successfull Message.")
-    elif check_for_noe(e): #Check for number of episodes
+    elif await check_for_noe(e): #Check for number of episodes
         noe = int(e.raw_text.split(" ")[1])
         e.raw_text = ""
         raw_url = (await e.get_reply_message()).raw_text
@@ -26,7 +26,7 @@ async def backup_file(e):
         dollar = "$"
         result = 0
         while result != -1:
-        	result = raw_text.find(dollar)
+        	result = raw_url.find(dollar)
         	if result != -1:
         		#length of dollar
         		lod += 1
