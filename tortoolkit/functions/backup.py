@@ -32,7 +32,7 @@ async def backup_file(e):
         		lod += 1
         		dollar += "$"
         for i in range(1, noe+1):
-        	(await e.get_reply_message()).raw_text = raw_url.replace("$"*lenght_of_dollar, "{:0{}}".format(i, lenght_of_dollar))
+        	(await e.get_reply_message()).raw_text = raw_url.replace("$"*lod, "{:0{}}".format(i, lod))
         	await backup_file(e)
     else:
         if await check_for_index(e):
