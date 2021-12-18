@@ -8,6 +8,7 @@ from natsort import natsorted
 from telethon.errors import FloodWaitError
 
 from ..core.thumb_manage import get_thumbnail
+from ..core.getVars import get_val
 
 # Thanks TO https://github.com/UsergeTeam/Userge/blob/alpha/userge/plugins/misc/instadl.py
 
@@ -157,9 +158,9 @@ async def _insta_post_downloader(message):
         save_metadata=False,
         compress_json=False,
     )
-    if False:
-        # add auth code here
-        pass
+    if get_val("INSTA_USER") and get_val("INSTA_PASS"):
+        insta.login(get_val("INSTA_USER"), get_val("INSTA_PASS"))
+        message.edit("Login Done")
     else:
         await message.edit(
             "Login Credentials not found.\n`[NOTE]`: "
@@ -167,7 +168,7 @@ async def _insta_post_downloader(message):
         )
         await asyncio.sleep(2)
 
-    p = r"^https:\/\/www\.instagram\.com\/(p|tv|reel)\/([A-Za-z0-9\-_]*)\/(\?igshid=[a-zA-Z0-9]*)?$"
+    p = r"^https:\/\/www\.instagram\.com\/(p|tv|reel)\/([A-Za-z0-9\-_]*)\/*"
     match = re.search(p, omess.raw_text)
     print(omess.raw_text)
     if False:
