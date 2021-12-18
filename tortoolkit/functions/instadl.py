@@ -160,7 +160,7 @@ async def _insta_post_downloader(message):
     )
     if get_val("INSTA_USER") and get_val("INSTA_PASS"):
         insta.login(get_val("INSTA_USER"), get_val("INSTA_PASS"))
-        message.edit("Login Done")
+        await message.edit("Login Done")
     else:
         await message.edit(
             "Login Credentials not found.\n`[NOTE]`: "
