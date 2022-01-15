@@ -108,6 +108,8 @@ async def check_link(msg, rclone=False, is_zip=False, extract=False, prev_msg=No
                 dl_path = torrent_return[0]
                 dl_task = torrent_return[1]
 
+                remove_files_with_extension(dl_path, ".!qB")
+
                 if extract:
                     newpath = await handle_ext_zip(dl_path, rmess, omess)
                     if not newpath is False:
@@ -178,6 +180,8 @@ async def check_link(msg, rclone=False, is_zip=False, extract=False, prev_msg=No
             if not isinstance(torrent_return, bool) and torrent_return is not None:
                 dl_path = torrent_return[0]
                 dl_task = torrent_return[1]
+
+                remove_files_with_extension(dl_path, ".!qB")
 
                 if extract:
                     newpath = await handle_ext_zip(dl_path, rmess, omess)
@@ -257,6 +261,8 @@ async def check_link(msg, rclone=False, is_zip=False, extract=False, prev_msg=No
             if not isinstance(torrent_return, bool) and torrent_return is not None:
                 dl_path = torrent_return[0]
                 dl_task = torrent_return[1]
+
+                remove_files_with_extension(dl_path, ".!qB")
 
                 if extract:
                     newpath = await handle_ext_zip(dl_path, rmess, omess)
@@ -671,3 +677,11 @@ def get_size_fl(start_path="."):
                 total_size += os.path.getsize(fp)
 
     return total_size
+
+def remove_files_with_extension(path, extension):
+    for dirpath, dirnames, filenames in os.walk(path):
+        for file in filenames:
+            if file.endswith(extension):
+                os.remove(os.path.join(dirpath, file))
+        for dirname in dirnames:
+            remove_files_with_extension(dirname, extension)
