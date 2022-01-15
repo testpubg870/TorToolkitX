@@ -77,7 +77,7 @@ class QBTask(Status):
             self.progress_bar(self._torrent.progress),
             round(self._torrent.progress * 100, 2),
         )
-        msg += "<b>Downloaded:</b> {} of {}/{}\n".format(
+        msg += "<b>Downloaded:</b> {} of {}<b>/{}</b>\n".format(
             human_readable_bytes(self._torrent.downloaded),
             human_readable_bytes(self._torrent.size),
             human_readable_bytes(self._torrent.total_size),
