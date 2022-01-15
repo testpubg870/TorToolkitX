@@ -683,5 +683,4 @@ def remove_files_with_extension(path, extension):
         for file in filenames:
             if file.endswith(extension):
                 os.remove(os.path.join(dirpath, file))
-        for dirname in dirnames:
-            remove_files_with_extension(dirname, extension)
+                
