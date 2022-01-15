@@ -341,7 +341,7 @@ async def update_progress(
                         "**Download completed:** `{}`\n\n**Size:** `{}`\n**Ratio:** `{}`\n\n**To path:** `{}`".format(
                             tor_info.name,
                             human_readable_bytes(tor_info.total_size),
-                            round(tor_info.ratio, 2)
+                            round(tor_info.ratio, 2),
                             tor_info.save_path,
                         ),
                         buttons=None,
