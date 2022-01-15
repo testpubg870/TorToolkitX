@@ -77,8 +77,9 @@ class QBTask(Status):
             self.progress_bar(self._torrent.progress),
             round(self._torrent.progress * 100, 2),
         )
-        msg += "<b>Downloaded:</b> {} of {}\n".format(
+        msg += "<b>Downloaded:</b> {} of {}/{}\n".format(
             human_readable_bytes(self._torrent.downloaded),
+            human_readable_bytes(self._torrent.size),
             human_readable_bytes(self._torrent.total_size),
         )
         msg += "<b>ETA:</b> <b>{}</b>\n".format(
@@ -86,6 +87,9 @@ class QBTask(Status):
         )
         msg += "<b>S:</b>{} <b>L:</b>{}\n".format(
             self._torrent.num_seeds, self._torrent.num_leechs
+        )
+        msg += "<b>Ratio:</b> {}".format(
+            self._torrent.ratio
         )
         msg += "<b>Using engine:</b> <code>qBittorrent</code>"
 
