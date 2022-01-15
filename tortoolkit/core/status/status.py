@@ -88,8 +88,8 @@ class QBTask(Status):
         msg += "<b>S:</b>{} <b>L:</b>{}\n".format(
             self._torrent.num_seeds, self._torrent.num_leechs
         )
-        msg += "<b>Ratio:</b> {}".format(
-            self._torrent.ratio
+        msg += "<b>Ratio:</b> {}\n".format(
+            round(self._torrent.ratio, 2)
         )
         msg += "<b>Using engine:</b> <code>qBittorrent</code>"
 
