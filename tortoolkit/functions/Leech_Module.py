@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # (c) YashDK [yash-dk@github]
-# (c) modified by AmirulAndalib [amirulandalib@github]
+# (c) modified by SKR [skr1405@github]
 
 import asyncio as aio
 import logging
@@ -17,6 +17,7 @@ from ..core.getVars import get_val
 from ..core.status.status import ARTask, MegaDl
 from ..core.status.upload import TGUploadTask
 from ..functions.Human_Format import human_readable_bytes
+from ..functions.admin_check import is_admin
 from . import QBittorrentWrap, ariatools, megatools
 from .dl_generator import generate_directs
 from .megatools import megadl
@@ -338,6 +339,12 @@ async def check_link(msg, rclone=False, is_zip=False, extract=False, prev_msg=No
             else:
                 torlog.info("The aria2 Downloading:\n{}".format(url))
                 await aio.sleep(1)
+
+                if (get_val("GD_INDEX_URL") in url) and (not await is_admin(omess.client, omess.sender_id, omess.chat_id)) and rclone:
+                    await rmsg.edit("**You Are Not Allowed To Leech This Link...**\nIt's already on our Server...")
+                    await aio.sleep(2)
+                    await errored_message(omess, rmsg)
+                    return
 
                 url = await generate_directs(url)
                 if url is not None:
