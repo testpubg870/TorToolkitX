@@ -179,7 +179,7 @@ input[type="submit"]:hover, input[type="submit"]:focus{
     <header>
       <div class="brand">
         <img
-          src="https://raw.githubusercontent.com/skr1405/A2Z-Shows-Website/main/images/favicon.png"
+          src="https://raw.githubusercontent.com/a2z-shows/web/main/images/favicon.png"
           alt="logo"
         />
         <a href="https://t.me/a2z_leech"> 
@@ -299,7 +299,7 @@ code_page = """
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Torrent Code Checker</title>
-    <link rel="icon" href="https://raw.githubusercontent.com/skr1405/A2Z-Shows-Website/main/images/favicon.png" type="image/jpg"> 
+    <link rel="icon" href="https://raw.githubusercontent.com/a2z-shows/web/main/images/favicon.png" type="image/jpg"> 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -470,7 +470,7 @@ section span{
     <header>
       <div class="brand">
         <img
-          src="https://raw.githubusercontent.com/skr1405/A2Z-Shows-Website/main/images/favicon.png"
+          src="https://raw.githubusercontent.com/a2z-shows/web/main/images/favicon.png"
           alt="logo"
         />
         <a href="https://t.me/a2z_leech">
