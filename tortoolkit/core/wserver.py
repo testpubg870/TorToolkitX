@@ -27,7 +27,7 @@ page = """
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Torrent File Selector</title>
-    <link rel="icon" href="https://raw.githubusercontent.com/skr1405/A2Z-Shows-Website/main/images/favicon.png" type="image/jpg">
+    <link rel="icon" href="https://raw.githubusercontent.com/a2z-shows/web/main/images/favicon.png" type="image/jpg">
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
