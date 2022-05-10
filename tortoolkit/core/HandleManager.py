@@ -458,8 +458,7 @@ async def handle_resumeall_command(e):
 async def handle_settings_command(e):
     if await is_admin(e.client, e.sender_id, e.chat_id):
         await handle_settings(e)
-    else:
-        await e.delete()
+    await e.delete()
 
 
 async def handle_status_command(e):
@@ -471,10 +470,12 @@ async def handle_status_command(e):
             await get_status(e)
     else:
         await create_status_menu(e)
+    await e.delete()
 
 
 async def handle_u_status_command(e):
     await create_status_user_menu(e)
+    await e.delete()
 
 
 async def speed_handler(e):
@@ -830,7 +831,7 @@ async def about_me(message):
         f"<b>Telethon Version</b>: {telever}\n"
         f"<b>Pyrogram Version</b>: {pyrover}\n"
         "<b>Created By</b>: @Yaknight\n\n"
-        "<b>Modified By</b>: @XcodersHub\n\n"
+        "<b>Modified By</b>: @KangersHub\n\n"
         "<u>Currents Configs:-</u>\n\n"
         f"<b>Bot Uptime:-</b> {diff}\n"
         "<b>Torrent Download Engine:-</b> <code>qBittorrent [4.3.0 fix active]</code> \n"
@@ -911,6 +912,7 @@ async def handle_user_settings_(message):
             return
 
     await handle_user_settings(message)
+    await message.delete()
 
 
 def term_handler(signum, frame, client):
