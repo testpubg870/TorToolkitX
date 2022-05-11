@@ -10,6 +10,8 @@ except:
         API_ID = 0
         BOT_TOKEN = ""
         BASE_URL_OF_BOT = ""
+        
+        BACKUP_CHANNEL = 0
 
         # Edit the server port if you want to keep it default though.
         SERVPORT = 80
@@ -25,7 +27,7 @@ except:
         EDIT_SLEEP_SECS = 10
 
         # Telegram Upload Limit (in bytes)
-        TG_UP_LIMIT = 1700000000
+        TG_UP_LIMIT = 2097152000
 
         # Should force evething uploaded into Document
         FORCE_DOCUMENTS = False
